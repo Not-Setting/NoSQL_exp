@@ -6,12 +6,12 @@ import requests
 from folium.plugins import HeatMap
 from pymongo import MongoClient
 import pandas as pd
-import matplotlib.pyplot as plt
 import seaborn as sns
+import matplotlib.pyplot as plt
 import os
 
 # 忽略 FutureWarning
-warnings.simplefilter(action='ignore', category=FutureWarning)
+#warnings.simplefilter(action='ignore', category=FutureWarning)
 
 class DataShower:
     def __init__(self):
@@ -22,6 +22,7 @@ class DataShower:
         self.rooms_collection = self.db["rooms"]
         # 从集合中读取数据
         self.hotels_data = list(self.hotels_collection.find({}))
+        self.rooms_data = list(self.rooms_collection.find({}))
 
         plt.rcParams["font.sans-serif"] = ["SimHei"]  # 使用黑体（SimHei）显示中文
         plt.rcParams["axes.unicode_minus"] = False  # 避免负号显示为方块
@@ -287,5 +288,5 @@ class DataShower:
 
 if __name__ == "__main__":
     dataShower = DataShower()
-    dataShower.task_2()
+    dataShower.task_1()
 
