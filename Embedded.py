@@ -5,8 +5,8 @@ from pymongo import MongoClient
 
 # 1. 加载酒店数据和房间数据
 # 假设酒店信息存储在 hotels.json 文件中，房间信息存储在 rooms.json 文件中
-hotels_df = pd.read_csv('./data/csv/hotels.csv')
-rooms_df = pd.read_csv('./data/csv/rooms.csv')
+hotels_df = pd.read_csv('./data/csv/cleaned_hotels.csv')
+rooms_df = pd.read_csv('./data/csv/cleaned_rooms.csv')
 
 hotels_df = hotels_df.drop(columns=['id'], errors='ignore')  # 去掉酒店数据中的 'hotel_id'
 rooms_df = rooms_df.drop(columns=['id'], errors='ignore')  # 去掉房间数据中的 'room_id'

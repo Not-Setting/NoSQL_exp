@@ -1,3 +1,4 @@
+import time
 import warnings
 
 import folium
@@ -17,7 +18,7 @@ class DataShower:
         # 连接到 MongoDB
         self.client = MongoClient("mongodb://localhost:27017/")
         self.db = self.client["hotel_database"]
-        self.hotels_collection = self.db["hotels"]
+        self.hotels_collection = self.db["hotelwithrooms"]
         self.rooms_collection = self.db["rooms"]
         # 从集合中读取数据
         self.hotels_data = list(self.hotels_collection.find({}))
@@ -118,18 +119,21 @@ class DataShower:
         # 使用散点图，调整点的大小、透明度和颜色
         scatter = sns.scatterplot(data=price_score_df, x="hotel_score", y="max_room_price",
                                   hue="hotel_grade_text", palette="viridis", s=100, alpha=0.7, edgecolor="black")
+
+        # 设置字体为 Microsoft YaHei 以显示中文
         plt.rcParams["font.sans-serif"] = ["Microsoft YaHei"]
         plt.rcParams["axes.unicode_minus"] = False  # 避免负号显示为方块
+
         # 优化图表外观
-        plt.title("Relationship between Hotel Ratings and Maximum Room Rates", fontsize=16, weight='bold', color='darkblue')
-        plt.xlabel("Hotel Score", fontsize=14)
-        plt.ylabel("Maximum Room Price (USD)", fontsize=14)
+        plt.title("酒店评分与最高房间价格的关系", fontsize=16, weight='bold', color='darkblue')  # 标题改为中文
+        plt.xlabel("酒店评分", fontsize=14)  # 横坐标标签改为中文
+        plt.ylabel("最高房间价格 (美元)", fontsize=14)  # 纵坐标标签改为中文
 
         # 增加网格线，并设置透明度
         plt.grid(True, linestyle='--', alpha=0.6)
 
         # 增加颜色条（legend）并调整位置
-        plt.legend(title="Hotel Grade", loc="upper left", fontsize=12, title_fontsize=14)
+        plt.legend(title="酒店等级", loc="upper left", fontsize=12, title_fontsize=14)  # 图例改为中文
 
         # 美化坐标轴
         plt.xticks(fontsize=12)
@@ -248,7 +252,7 @@ class DataShower:
             "query": "",
             "region": city_name,
             "output": "json",
-            "ak": "XXXXXX",
+            "ak": "d2VPDIAKHdEM5VAStBXH4LXN8cWfVwXM",
         }
 
         for index,row in geo_df.iterrows():
@@ -274,6 +278,7 @@ class DataShower:
                 except IndexError:
                     print(row)
                     continue
+
                 if ((city_name == "北京" and response.json()['results'][0]['city'] != "北京市")
                         or (city_name == "天津" and response.json()['results'][0]['city'] != "天津市")):
                     geo_df.at[index, 'province'] = None
@@ -299,4 +304,5 @@ if __name__ == "__main__":
 
     dataShower = DataShower()
     dataShower.task_1()
-
+    dataShower.task_2()
+    #dataShower.task_3("天津")

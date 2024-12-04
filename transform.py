@@ -6,8 +6,8 @@ def xlsx_to_csv(xlsx_file, csv_file):
         # 使用pandas读取xlsx文件，强制将所有数据作为字符串类型读取
         df = pd.read_excel(xlsx_file, sheet_name=0, dtype=str, engine='openpyxl')
 
-        # 填充空值为 NaN 或其他指定值
-        df.fillna('NaN', inplace=True)  # 将 NaN 填充为空字符串，您也可以填充为其他默认值
+        # 删除所有包含空字符（空字符串或NaN）的行
+        df = df[~df.apply(lambda row: row.astype(str).str.strip().eq('').any(), axis=1)]  # 删除含空字符的行
 
         # 将DataFrame写入csv文件
         df.to_csv(csv_file, index=False)  # index=False 表示不写入行号
