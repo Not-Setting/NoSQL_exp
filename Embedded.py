@@ -2,11 +2,15 @@ import time
 
 import pandas as pd
 from pymongo import MongoClient
-
+#
 # # 1. 加载酒店数据和房间数据
 # # 假设酒店信息存储在 hotels.json 文件中，房间信息存储在 rooms.json 文件中
 # hotels_df = pd.read_csv('./data/csv/hotels.csv')
 # rooms_df = pd.read_csv('./data/csv/rooms.csv')
+#
+# # hotels_df = hotels_df.drop(columns=['id'], errors='ignore')  # 去掉酒店数据中的 'hotel_id'
+# # rooms_df = rooms_df.drop(columns=['id'], errors='ignore')  # 去掉房间数据中的 'room_id'
+#
 #
 # # 2. 将房间信息嵌入到酒店信息中
 # # 假设酒店信息有 'hotel_id' 字段，房间信息有 'hotel_id' 字段，我们可以通过 hotel_id 合并数据
@@ -24,9 +28,9 @@ from pymongo import MongoClient
 #     hotels_with_rooms.at[idx, 'rooms'] = rooms_for_hotel.to_dict(orient='records')
 #
 # hotels_with_rooms.to_json('./data/josn/hotels_with_rooms.json', orient='records', lines=True, force_ascii=False)
-#
 
-hotels_with_rooms = pd.read_json("./data/josn/hotels_with_rooms.json", lines=True)
+
+hotels_with_rooms = pd.read_json("./data/josn/hotels_with_rooms_noid.json", lines=True)
 
 # 3. 连接到 MongoDB
 # 创建一个 MongoClient 实例，连接到 MongoDB 本地数据库
