@@ -303,6 +303,6 @@ class DataShower:
 if __name__ == "__main__":
 
     dataShower = DataShower()
-    dataShower.task_1()
-    dataShower.task_2()
-    #dataShower.task_3("天津")
+    # dataShower.task_1()
+    # dataShower.task_2()
+    dataShower.task_3("天津")
