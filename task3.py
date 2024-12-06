@@ -43,10 +43,10 @@ def get_location_by_address(address, api_key):
         print("请求失败")
         return None, None
 
-
+# 选择城市进行热力图建模
 def choosecity(city,api_key):
     # 读取数据
-    file_path = './data/csv/cleaned_hotels.csv'  # 请根据实际路径调整
+    #file_path = './data/csv/cleaned_hotels.csv'  # 请根据实际路径调整
 
 
 
