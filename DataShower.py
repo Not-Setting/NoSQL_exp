@@ -99,7 +99,10 @@ class DataShower:
         plt.ylabel('出现次数', fontsize=14)
         plt.legend(loc='upper left', fontsize=12)
         plt.tight_layout()
+        plt.savefig('./output/figs/task1.eps')
+        plt.savefig('./output/figs/task1.png', dpi=300)
         plt.show()
+
 
     def task_2(self):
         # 将数据转换为 DataFrame
@@ -141,9 +144,11 @@ class DataShower:
 
         # 优化布局
         plt.tight_layout()
-
+        plt.savefig('./output/figs/task2.eps')
+        plt.savefig('./output/figs/task2.png', dpi=300)
         # 显示图表
         plt.show()
+
 
     def task_3(self, city_name, mode=1):
         if self.geo_data(city_name,mode):
@@ -303,6 +308,6 @@ class DataShower:
 if __name__ == "__main__":
 
     dataShower = DataShower()
-    # dataShower.task_1()
-    # dataShower.task_2()
-    dataShower.task_3("天津")
+    dataShower.task_1()
+    dataShower.task_2()
+   # dataShower.task_3("天津")
