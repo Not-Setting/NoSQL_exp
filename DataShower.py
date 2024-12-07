@@ -130,7 +130,7 @@ class DataShower:
         # 优化图表外观
         plt.title("酒店评分与最高房间价格的关系", fontsize=16, weight='bold', color='darkblue')  # 标题改为中文
         plt.xlabel("酒店评分", fontsize=14)  # 横坐标标签改为中文
-        plt.ylabel("最高房间价格 (美元)", fontsize=14)  # 纵坐标标签改为中文
+        plt.ylabel("最高房间价格 (元)", fontsize=14)  # 纵坐标标签改为中文
 
         # 增加网格线，并设置透明度
         plt.grid(True, linestyle='--', alpha=0.6)
@@ -144,10 +144,47 @@ class DataShower:
 
         # 优化布局
         plt.tight_layout()
-        plt.savefig('./output/figs/task2.eps')
-        plt.savefig('./output/figs/task2.png', dpi=300)
+        plt.savefig('./output/figs/task2_max.eps')
+        plt.savefig('./output/figs/task2_max.png', dpi=300)
         # 显示图表
         plt.show()
+
+        price_score_df = hotels_df.groupby(["hotel_score", "hotel_grade_text"]).agg(
+            max_room_price=("room_price", "min")
+        ).reset_index()
+
+        plt.figure(figsize=(12, 8))  # 增大图表尺寸
+
+        # 使用散点图，调整点的大小、透明度和颜色
+        scatter = sns.scatterplot(data=price_score_df, x="hotel_score", y="max_room_price",
+                                  hue="hotel_grade_text", palette="viridis", s=100, alpha=0.7, edgecolor="black")
+
+        # 设置字体为 Microsoft YaHei 以显示中文
+        plt.rcParams["font.sans-serif"] = ["Microsoft YaHei"]
+        plt.rcParams["axes.unicode_minus"] = False  # 避免负号显示为方块
+
+        # 优化图表外观
+        plt.title("酒店评分与最低房间价格的关系", fontsize=16, weight='bold', color='darkblue')  # 标题改为中文
+        plt.xlabel("酒店评分", fontsize=14)  # 横坐标标签改为中文
+        plt.ylabel("最低房间价格 (元)", fontsize=14)  # 纵坐标标签改为中文
+
+        # 增加网格线，并设置透明度
+        plt.grid(True, linestyle='--', alpha=0.6)
+
+        # 增加颜色条（legend）并调整位置
+        plt.legend(title="酒店等级", loc="upper left", fontsize=12, title_fontsize=14)  # 图例改为中文
+
+        # 美化坐标轴
+        plt.xticks(fontsize=12)
+        plt.yticks(fontsize=12)
+
+        # 优化布局
+        plt.tight_layout()
+        plt.savefig('./output/figs/task2_min.eps')
+        plt.savefig('./output/figs/task2_min.png', dpi=300)
+        # 显示图表
+        plt.show()
+
 
 
     def task_3(self, city_name, mode=1):
@@ -308,6 +345,6 @@ class DataShower:
 if __name__ == "__main__":
 
     dataShower = DataShower()
-    dataShower.task_1()
+    #dataShower.task_1()
     dataShower.task_2()
    # dataShower.task_3("天津")
