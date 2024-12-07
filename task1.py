@@ -3,6 +3,8 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from pymongo import MongoClient
 
+from task3 import hotels_data
+
 
 def plot_hotel_scores(hotels_data):
     # 将数据转换为 DataFrame
@@ -77,10 +79,10 @@ def plot_hotel_scores(hotels_data):
 
 
 # 生成图表
-client = MongoClient('mongodb://localhost:27017/')  # 替换为你的 MongoDB 连接 URI
-db = client['hotel_database']  # 替换为你的数据库名称
-collection = db['hotelwithrooms']  # 替换为你的集合名称
 
-hotels_data = list(collection.find({}))
+client = MongoClient('mongodb://localhost:27017/')
+db = client['hotel_database']
+collection = db['hotelwithrooms']
+hotels_data = list(collection.find({},{"hotel_score":1,"hotel_city_name":1,"room_price_range":1}))
 
 plot_hotel_scores(hotels_data)
