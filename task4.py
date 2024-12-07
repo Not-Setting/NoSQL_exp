@@ -74,9 +74,12 @@ def task1(city, grade):
     plt.savefig('./output/figs/task4_1'+city+grade+'.eps')
     plt.savefig('./output/figs/task4_'+city+grade+'1.png', dpi=300)
     plt.show()
-
     # 返回清洗后的数据框以供进一步分析
     return df
+
+
+
+
 
 # 示例调用
 city = "北京"  # 修改为 'tianjing' 可分析天津数据

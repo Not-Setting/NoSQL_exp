@@ -58,6 +58,14 @@ def choosecity(city, api_key):
             (hotels_data['hotel_city_name'].isin(['天津']))
         ]
         m = folium.Map(location=[39.0857, 117.1951], zoom_start=10)
+    elif city == "chengdu":
+        data = list(collection.find({"hotel_city_name": '成都'}))
+        hotels_data = pd.json_normalize(data)
+        filtered_hotels = hotels_data[
+            (hotels_data['hotel_grade_text'] == '高档型') &
+            (hotels_data['hotel_city_name'].isin(['成都']))
+        ]
+        m = folium.Map(location=[39.0857, 117.1951], zoom_start=10)
     else:
         print("Error: Unsupported city")
         return
@@ -114,7 +122,7 @@ def choosecity(city, api_key):
 api_key = "d2VPDIAKHdEM5VAStBXH4LXN8cWfVwXM"
 city = "beijing"
 
-choosecity(city, api_key)
+#choosecity(city, api_key)
 
-city = "tianjing"
+city = "chengdu"
 choosecity(city, api_key)
