@@ -1,9 +1,11 @@
+from os.path import curdir
+
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 from pymongo import MongoClient
 
-from task3 import hotels_data
+
 
 
 def plot_hotel_scores(hotels_data):
@@ -71,6 +73,7 @@ def plot_hotel_scores(hotels_data):
     plt.title('酒店评分统计信息', fontsize=16, weight='bold', color='darkblue', fontname='Microsoft YaHei')
     plt.ylabel('评分', fontsize=14)
     plt.xlabel('统计指标', fontsize=14)
+    plt.ylim(4, 5.2)
     plt.tight_layout()
 
     # 保存第二张图片
@@ -83,6 +86,14 @@ def plot_hotel_scores(hotels_data):
 client = MongoClient('mongodb://localhost:27017/')
 db = client['hotel_database']
 collection = db['hotelwithrooms']
-hotels_data = list(collection.find({},{"hotel_score":1,"hotel_city_name":1,"room_price_range":1}))
+cursor = collection.find({},{"hotel_score":1})
+hotels_data = list(cursor)
+cursor.close()
+
+
+# cursor = collection.find({},{"hotel_score":1,"hotel_city_name":1,"room_price_range":1})
+# hotels_data = list(cursor)
+# cursor.close()
+
 
 plot_hotel_scores(hotels_data)
