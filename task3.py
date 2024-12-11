@@ -108,7 +108,7 @@ def choosecity(city,api_key):
 
     print(f"热力图已保存到 {output_path}")
 
-api_key = "d2VPDIAKHdEM5VAStBXH4LXN8cWfVwXM"
+api_key = "XXXXXXXXX"
 city = "beijing"
 
 choosecity(city,api_key)
