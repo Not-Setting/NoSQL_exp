@@ -119,7 +119,7 @@ def choosecity(city, api_key):
     print(f"酒店地图已保存到 {output_path}")
 
 # 设置API密钥
-api_key = "d2VPDIAKHdEM5VAStBXH4LXN8cWfVwXM"
+api_key = "XXXXXXXXXXX"
 city = "beijing"
 
 #choosecity(city, api_key)
